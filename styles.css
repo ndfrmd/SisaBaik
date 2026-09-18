@@ -406,7 +406,7 @@ input[type="checkbox"], input[type="radio"] {
   justify-content: space-between;
   align-items: center;
 }
-
+}
 @media (min-width: 68rem) {
   .offer-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
