@@ -50,28 +50,33 @@ Status: LULUS
 
 3\. PENGUJIAN API
 
+### Catatan hasil pengujian sebelumnya
 
+Laporan pengujian sebelumnya mencatat bahwa skrip API menyelesaikan pengujian dengan status PASS dan data pesanan serta penawaran tetap tersimpan.
+
+Tanggal dan rincian lengkap pelaksanaan pengujian sebelumnya tidak tercatat secara terperinci.
+
+Status: **LULUS (berdasarkan catatan pengujian sebelumnya).**
+
+### Pengujian ulang pada 3 November 2026
 
 Perintah:
 
-npm run api:test
+```bash
+npm run api:test:chapter7
+```
 
+Hasil aktual:
 
+- 6 pemeriksaan awal berhasil (PASS).
+- Pengujian berhenti pada permintaan POST penawaran.
+- Skrip mengharapkan HTTP 400, tetapi server memberikan HTTP 401 (`AUTH_REQUIRED`).
 
-Hasil yang tercatat:
+Penyebab: skrip pengujian Chapter 7 masih mengirim permintaan mutasi tanpa token autentikasi, sedangkan endpoint tersebut sekarang memerlukan autentikasi.
 
-Skrip pengujian API sebelumnya menyelesaikan pengujian dengan status PASS. Pesan akhirnya menunjukkan bahwa data pesanan dan penawaran tetap tersimpan.
+Status: **BELUM LULUS — skrip pengujian perlu disesuaikan dengan mekanisme autentikasi dan otorisasi Chapter 8.**
 
-
-
-Status: LULUS
-
-
-
-Catatan:
-
-Tambahkan tanggal pelaksanaan dan rincian hasil pengujian jika diperlukan.
-
+Catatan: Kegagalan skrip ini tidak dengan sendirinya membuktikan bahwa implementasi endpoint API rusak.
 
 
 4\. PENGUJIAN KONKURENSI PESANAN
@@ -148,14 +153,11 @@ Respons error menggunakan properti success bernilai false dan objek error yang m
 
 6\. KESIMPULAN
 
+Pemeriksaan koneksi PostgreSQL berhasil dilakukan. Catatan pengujian sebelumnya menunjukkan pengujian API pernah lulus, sedangkan pengujian konkurensi menunjukkan bahwa satu permintaan pesanan berhasil dan permintaan lainnya ditolak karena konflik stok.
 
+Pada pengujian ulang tanggal 3 November 2026, skrip API Chapter 7 belum berhasil diselesaikan karena belum menyesuaikan kebutuhan token autentikasi pada endpoint yang diuji.
 
-Pemeriksaan koneksi database berhasil, pengujian API sebelumnya lulus, dan pengujian konkurensi menunjukkan satu permintaan berhasil serta satu permintaan ditolak karena konflik stok.
-
-
-
-Hasil ini mendukung bahwa alur pengelolaan stok bekerja sesuai harapan pada skenario yang telah diuji.
-
+Dengan demikian, hasil pengujian konkurensi tetap dicatat sebagai lulus untuk skenario yang telah dijalankan, sedangkan pengujian ulang API Chapter 7 masih memerlukan penyesuaian skrip.
 
 
 7\. INFORMASI TAMBAHAN

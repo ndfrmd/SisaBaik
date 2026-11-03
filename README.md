@@ -167,16 +167,23 @@ Hasil tersebut menunjukkan bahwa pada skenario pengujian, hanya satu pesanan yan
 
 ### Pengujian autentikasi Chapter 8
 
-Pengujian otomatis Chapter 8 menghasilkan:
+Pengujian otomatis Chapter 8 dijalankan menggunakan:
+
+```bash
+npm run auth:test
+```
+
+Hasil pengujian aktual:
 
 - 44 pemeriksaan HTTP dan assertion kepemilikan/snapshot berhasil.
-- Pengujian logout menghasilkan penolakan sesi yang sudah dicabut.
-- Pengujian token kedaluwarsa menghasilkan `401 TOKEN_EXPIRED`.
-- Pengujian hak akses menghasilkan `403 ROLE_FORBIDDEN`.
-- Pengujian akun nonaktif menghasilkan `401 LOGIN_FAILED`.
-- Pengujian pesanan memastikan stok berkurang sesuai jumlah pesanan.
+- Pengujian logout memastikan sesi yang telah dicabut tidak dapat digunakan kembali.
+- Pengujian hak akses berdasarkan peran pengguna berhasil untuk skenario yang diuji.
+- Pengujian kepemilikan penawaran dan pesanan berhasil untuk skenario yang diuji.
+- Pengujian transaksi memeriksa snapshot harga dan integritas data pesanan.
 
-Hasil pengujian manual dan detail skenario dicatat pada `docs/hasil-uji-chapter8.md`.
+Hasil lengkap pengujian dicatat pada `docs/hasil-uji-chapter8.md`.
+
+**Catatan:** Pengujian token kedaluwarsa, akun nonaktif, dan pengujian manual melalui browser belum diverifikasi secara terpisah. Karena itu, skenario tersebut belum dinyatakan lulus.
 
 ## 10. Dokumentasi API
 
