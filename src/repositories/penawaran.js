@@ -55,6 +55,7 @@ export function daftarPenawaran(filter, paging, pemilikId = null) {
         AND pemilik.peran='penyedia'
         AND py.status_verifikasi='terverifikasi'))
       AND ($5::bigint IS NULL OR p.penyedia_id=$5)`;
+    // Filter dan ID pemilik yang sama dipakai untuk hitung total dan daftar penawaran.
     const nilai = [
       filter.q,
       filter.kategori,

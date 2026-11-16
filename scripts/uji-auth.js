@@ -217,6 +217,49 @@ try {
 
   const id = buat.body.data.id;
   assert.equal(buat.body.data.penyediaId, rina.pengguna.penyediaId);
+  // Buat penawaran bernama sama untuk menguji batas kepemilikan.
+  const buatBudi = await api(
+    "/api/penawaran",
+    "POST",
+    payload,
+    budi.accessToken,
+  );
+  status(buatBudi, 201);
+  assert.equal(
+    buatBudi.body.data.penyediaId,
+    budi.pengguna.penyediaId,
+  );
+
+  // Kedua penyedia punya nama penawaran sama, tetapi total harus sesuai pemilik.
+  const urlMilik = `/api/penawaran/milik-saya?q=${encodeURIComponent(marker)}&limit=50`;
+
+  const milikRina = await api(
+    urlMilik,
+    "GET",
+    undefined,
+    rina.accessToken,
+  );
+  const milikBudi = await api(
+    urlMilik,
+    "GET",
+    undefined,
+    budi.accessToken,
+  );
+
+  status(milikRina, 200);
+  status(milikBudi, 200);
+
+  assert.equal(milikRina.body.meta.jumlah, 1);
+  assert.equal(milikBudi.body.meta.jumlah, 1);
+
+  assert.deepEqual(
+    milikRina.body.data.map((item) => item.id),
+    [id],
+  );
+  assert.deepEqual(
+    milikBudi.body.data.map((item) => item.id),
+    [buatBudi.body.data.id],
+  );
 
   status(
     await api(`/api/penawaran/${id}`, "PUT", payload, budi.accessToken),
@@ -377,7 +420,7 @@ try {
   console.log(`Bukti: penawaran ${id}, pesanan ${orderId}; fixture dipertahankan.`);
   console.log(
     "Empat akun uji dibuat dengan sandi acak yang tidak dicetak. " +
-      "Gunakan akun pendaftaran manual untuk pengujian browser.",
+    "Gunakan akun pendaftaran manual untuk pengujian browser.",
   );
 } catch (error) {
   console.error("FAIL:", error.message);
