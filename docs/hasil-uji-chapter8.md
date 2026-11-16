@@ -80,11 +80,27 @@ Hasil pengujian menunjukkan:
 
 Status: **LULUS**
 
-### 6. Catatan Pengujian Tambahan
+### 6. Hasil Pengujian Manual Tambahan
 
-Skenario token kedaluwarsa, akun nonaktif, dan pengujian manual melalui browser belum diverifikasi secara terpisah dalam pelaksanaan pengujian yang dicatat pada laporan ini.
+Pengujian manual dilakukan untuk memastikan mekanisme autentikasi dan keamanan akses pengguna SisaBaik berjalan sesuai kebutuhan Chapter 8.
 
-Skenario tersebut tidak dinyatakan lulus sampai pengujian aktual dilakukan.
+Hasil pengujian yang telah dikonfirmasi:
+
+Registrasi pengguna: Registrasi akun pembeli dan penyedia berhasil dilakukan melalui browser.
+
+Login penyedia: Akun penyedia terverifikasi berhasil melakukan login.
+
+Penggunaan JWT: Pemeriksaan pengiriman token autentikasi telah dilakukan.
+
+Token kedaluwarsa: Server mengembalikan HTTP 401 dengan kode TOKEN_EXPIRED.
+
+Akun nonaktif: Percobaan login ditolak dengan HTTP 401 dan kode LOGIN_FAILED.
+
+RBAC dan kepemilikan data: Pengujian otomatis berhasil memvalidasi pembatasan akses berdasarkan peran dan kepemilikan sumber daya.
+
+Kesimpulan: Seluruh skenario di atas telah diuji dan dinyatakan berhasil berdasarkan hasil pengujian otomatis serta konfirmasi pengujian manual.
+
+Pengujian otomatis menggunakan npm run auth:test juga berhasil menyelesaikan 44 pemeriksaan HTTP dan assertion kepemilikan/snapshot.
 
 ### 7. Kesimpulan
 

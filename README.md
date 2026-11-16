@@ -183,7 +183,7 @@ Hasil pengujian aktual:
 
 Hasil lengkap pengujian dicatat pada `docs/hasil-uji-chapter8.md`.
 
-**Catatan:** Pengujian token kedaluwarsa, akun nonaktif, dan pengujian manual melalui browser belum diverifikasi secara terpisah. Karena itu, skenario tersebut belum dinyatakan lulus.
+**Catatan:** Pengujian manual melalui browser telah dilakukan untuk registrasi, login penyedia terverifikasi, dan pemeriksaan penggunaan token autentikasi. Pengujian token kedaluwarsa menghasilkan HTTP 401 dengan kode TOKEN_EXPIRED, sedangkan percobaan login akun nonaktif menghasilkan HTTP 401 dengan kode LOGIN_FAILED. Kedua hasil tersebut telah dikonfirmasi melalui pengujian manual. Rincian hasil pengujian dicatat pada docs/hasil-uji-chapter8.md.
 
 ## 10. Dokumentasi API
 
